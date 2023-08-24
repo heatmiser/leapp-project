@@ -48,6 +48,36 @@ controller_templates:
       leapp_upgrade_type: rhui
       leapp_repos_enabled: []
     ask_variables_on_launch: true
+  - name: AUTO / 01 Analysis / RHEL6
+    project: Project Leapp
+    playbook: analysis.yml
+    inventory: Workshop Inventory
+    credentials:
+      - Workshop Credential
+    survey_enabled: true
+    survey:
+      name: ''
+      description: ''
+      spec:
+        - question_name: Select inventory group
+          type: multiplechoice
+          variable: rhel_inventory_group
+          choices:
+            - ALL_rhel
+            - rhel6
+          required: true
+        - question_name: Enter server name - Leave blank to target all
+          type: text
+          variable: ripu_pet_name
+          required: false
+    extra_vars:
+      leapp_upgrade_type: rhui
+      leapp_repos_enabled: []
+    analysis_repos_el6:
+      - rhui-REGION-rhel-server-extras
+      - rhui-REGION-server-releases-optional
+    ask_variables_on_launch: true
+    execution_environment: Ansible Engine 2.9 execution environment
   - name: OS / Upgrade
     project: Project Leapp
     playbook: upgrade.yml
@@ -76,6 +106,33 @@ controller_templates:
       leapp_upgrade_type: rhui
       leapp_repos_enabled: []
     ask_variables_on_launch: true
+  - name: OS / Upgrade / RHEL6
+    project: Project Leapp
+    playbook: upgrade.yml
+    inventory: Workshop Inventory
+    credentials:
+      - Workshop Credential
+    survey_enabled: true
+    survey:
+      name: ''
+      description: ''
+      spec:
+        - question_name: Select inventory group
+          type: multiplechoice
+          variable: rhel_inventory_group
+          choices:
+            - ALL_rhel
+            - rhel6
+          required: true
+        - question_name: Enter server name - Leave blank to target all
+          type: text
+          variable: ripu_pet_name
+          required: false
+    extra_vars:
+      leapp_upgrade_type: rhui
+      leapp_repos_enabled: []
+    ask_variables_on_launch: true
+    execution_environment: Ansible Engine 2.9 execution environment
   - name: OS / Remediation
     project: Project Leapp
     playbook: remediate.yml
@@ -268,6 +325,7 @@ controller_templates:
           variable: rhel_inventory_group
           choices:
             - ALL_rhel
+            - rhel6
             - rhel7
             - rhel8
             - rhel9
