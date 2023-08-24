@@ -73,9 +73,9 @@ controller_templates:
     extra_vars:
       leapp_upgrade_type: rhui
       leapp_repos_enabled: []
-    analysis_repos_el6:
-      - rhui-REGION-rhel-server-extras
-      - rhui-REGION-server-releases-optional
+      analysis_repos_el6:
+        - rhui-REGION-rhel-server-extras
+        - rhui-REGION-rhel-server-releases-optional
     ask_variables_on_launch: true
     execution_environment: Ansible Engine 2.9 execution environment
   - name: OS / Upgrade
