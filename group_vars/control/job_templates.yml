@@ -66,10 +66,6 @@ controller_templates:
             - ALL_rhel
             - rhel6
           required: true
-        - question_name: Enter server name - Leave blank to target all
-          type: text
-          variable: ripu_pet_name
-          required: false
     extra_vars:
       leapp_upgrade_type: rhui
       leapp_repos_enabled: []
@@ -77,6 +73,7 @@ controller_templates:
         - rhui-REGION-rhel-server-extras
         - rhui-REGION-rhel-server-releases-optional
     ask_variables_on_launch: true
+    ask_limit_on_launch: true
     execution_environment: Ansible Engine 2.9 execution environment
   - name: OS / Upgrade
     project: Project Leapp
