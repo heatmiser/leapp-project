@@ -4,8 +4,8 @@
   connection: local
   vars:
     controller_infra_workloads:
-      - infra.controller_configuration.execution_environments
       - infra.controller_configuration.projects
+      - infra.controller_configuration.execution_environments
       - infra.controller_configuration.inventories
       - infra.controller_configuration.inventory_sources
       - infra.controller_configuration.job_templates
