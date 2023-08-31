@@ -20,6 +20,7 @@ controller_templates:
             - rhel8
             - rhel9
           required: true
+    ask_limit_on_launch: true
   - name: AUTO / 01 Analysis
     project: Project Leapp
     playbook: analysis.yml
@@ -123,6 +124,7 @@ controller_templates:
       leapp_upgrade_type: rhui
       leapp_repos_enabled: []
     ask_variables_on_launch: true
+    ask_limit_on_launch: true
     execution_environment: Ansible Engine 2.9 execution environment
   - name: OS / Remediation
     project: Project Leapp
@@ -165,10 +167,7 @@ controller_templates:
             - rhel8
             - rhel9
           required: true
-        - question_name: Enter server name - Leave blank to target all
-          type: text
-          variable: ripu_pet_name
-          required: false
+    ask_limit_on_launch: true
   - name: UTILITY / Snapshot Instance
     project: LVM Snapshot
     playbook: snapshot_instance_aap2.yml
@@ -201,6 +200,15 @@ controller_templates:
             - rhel7
             - rhel8
             - rhel9
+          required: true
+        - question_name: Snapshot action
+          type: multiplechoice
+          variable: lvm_snapshots_action
+          choices:
+            - check
+            - create
+            - revert
+            - remove
           required: true
     ask_variables_on_launch: true
     ask_limit_on_launch: true
@@ -238,9 +246,9 @@ controller_templates:
           guid: "{{ lookup('env', 'AWX_HOST').split('.')[1] }}"
           Student: "{{ lookup('env', 'AWX_HOST').split('.')[0] | urlsplit('hostname') }}"
           operating_system: rhel
-  - name: UTILITY / Snapshot Delete
+  - name: Z / Archive / Snapshot Delete EBS mode
     project: Project Leapp
-    playbook: snapshot_delete.yml
+    playbook: snapshot_delete_ebs.yml
     inventory: Workshop Inventory
     limit: ansible-1
     credentials:
@@ -271,9 +279,9 @@ controller_templates:
           guid: "{{ lookup('env', 'AWX_HOST').split('.')[1] }}"
           Student: "{{ lookup('env', 'AWX_HOST').split('.')[0] | urlsplit('hostname') }}"
           operating_system: rhel
-  - name: AUTO / 03 Rollback
+  - name: Z / Archive / Snapshot Rollback EBS mode
     project: Project Leapp
-    playbook: rollback.yml
+    playbook: snapshot_rollback_ebs.yml
     inventory: Workshop Inventory
     limit: ansible-1
     credentials:
@@ -305,6 +313,42 @@ controller_templates:
           guid: "{{ lookup('env', 'AWX_HOST').split('.')[1] }}"
           Student: "{{ lookup('env', 'AWX_HOST').split('.')[0] | urlsplit('hostname') }}"
           operating_system: rhel
+  - name: AUTO / 03 Rollback
+    project: LVM Snapshot
+    playbook: snapshot_instance_aap2.yml
+    inventory: Workshop Inventory
+    credentials:
+      - Workshop Credential
+    extra_vars:
+      lvm_snapshots_set_name: snap01
+      lvm_snapshots_action: revert
+      lvm_snapshots_snapshot_autoextend_threshold: 70
+      lvm_snapshots_snapshot_autoextend_percent: 20
+      lvm_snapshots_boot_backup: true
+      lvm_snapshots_use_boom: true
+      lvm_snapshots_volumes:
+        - vg: VolGroup00
+          lv: rootVol
+          size: 40%FREE
+        - vg: VolGroup00
+          lv: varVol
+          size: 40%FREE
+    survey_enabled: true
+    survey:
+      name: ''
+      description: ''
+      spec:
+        - question_name: Select inventory group
+          type: multiplechoice
+          variable: rhel_inventory_group
+          choices:
+            - ALL_rhel
+            - rhel7
+            - rhel8
+            - rhel9
+          required: true
+    ask_variables_on_launch: true
+    ask_limit_on_launch: true
   - name: UTILITY / Instance Details
     project: Project Leapp
     playbook: instance_details.yml
@@ -318,9 +362,9 @@ controller_templates:
           guid: "{{ lookup('env', 'AWX_HOST').split('.')[1] }}"
           Student: "{{ lookup('env', 'AWX_HOST').split('.')[0] | urlsplit('hostname') }}"
           operating_system: rhel
-  - name: UTILITY / Snapshot Details
+  - name: Z / Archive / Snapshot Details EBS mode
     project: Project Leapp
-    playbook: snapshot_details.yml
+    playbook: snapshot_details_ebs.yml
     inventory: Workshop Inventory
     credentials:
       - Workshop Credential
