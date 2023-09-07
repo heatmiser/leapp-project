@@ -14,7 +14,7 @@ controller_workflows:
       spec:
         - question_name: Select inventory group
           type: multiplechoice
-          variable: rhel_inventory_group
+          variable: _hosts
           choices:
             - ALL_rhel
             - rhel7
@@ -48,7 +48,7 @@ controller_workflows:
       spec:
         - question_name: Select inventory group
           type: multiplechoice
-          variable: rhel_inventory_group
+          variable: _hosts
           choices:
             - ALL_rhel
             - rhel7

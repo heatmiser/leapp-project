@@ -1,6 +1,6 @@
 ---
 - name: Upgrade
-  hosts: "{{ rhel_inventory_group | default(omit) }}"
+  hosts: "{{ _hosts | default(omit) }}"
   strategy: free
   become: true
   force_handlers: true
