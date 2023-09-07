@@ -170,7 +170,7 @@ controller_templates:
     ask_limit_on_launch: true
   - name: UTILITY / Snapshot Instance
     project: Project Leapp
-    playbook: snapshot_instance_aap2.yml
+    playbook: snapshot_instance_lvm.yml
     inventory: Workshop Inventory
     credentials:
       - Workshop Credential
@@ -315,7 +315,7 @@ controller_templates:
           operating_system: rhel
   - name: AUTO / 03 Rollback
     project: Project Leapp
-    playbook: snapshot_instance_aap2.yml
+    playbook: snapshot_instance_lvm.yml
     inventory: Workshop Inventory
     credentials:
       - Workshop Credential
