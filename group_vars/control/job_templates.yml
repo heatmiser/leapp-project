@@ -86,7 +86,7 @@ controller_templates:
       spec:
         - question_name: Select inventory group
           type: multiplechoice
-          variable: _hosts
+          variable: rhel_inventory_group
           choices:
             - ALL_rhel
             - rhel7
@@ -194,7 +194,7 @@ controller_templates:
       spec:
         - question_name: Select inventory group
           type: multiplechoice
-          variable: _hosts
+          variable: rhel_inventory_group
           choices:
             - ALL_rhel
             - rhel7
@@ -340,7 +340,7 @@ controller_templates:
       spec:
         - question_name: Select inventory group
           type: multiplechoice
-          variable: _hosts
+          variable: rhel_inventory_group
           choices:
             - ALL_rhel
             - rhel7
@@ -405,7 +405,7 @@ controller_templates:
     credentials:
       - Workshop Credential
     extra_vars:
-      _hosts: all
+      rhel_inventory_group: all
   - name: UTILITY / Set instance tags
     project: Project Leapp
     playbook: set_instance_tags.yml
