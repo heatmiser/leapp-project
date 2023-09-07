@@ -169,7 +169,7 @@ controller_templates:
           required: true
     ask_limit_on_launch: true
   - name: UTILITY / Snapshot Instance
-    project: LVM Snapshot
+    project: Project Leapp
     playbook: snapshot_instance_aap2.yml
     inventory: Workshop Inventory
     credentials:
@@ -314,7 +314,7 @@ controller_templates:
           Student: "{{ lookup('env', 'AWX_HOST').split('.')[0] | urlsplit('hostname') }}"
           operating_system: rhel
   - name: AUTO / 03 Rollback
-    project: LVM Snapshot
+    project: Project Leapp
     playbook: snapshot_instance_aap2.yml
     inventory: Workshop Inventory
     credentials:
