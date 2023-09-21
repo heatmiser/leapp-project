@@ -17,7 +17,7 @@ collections:
 #  source: https://galaxy.ansible.com # The Galaxy URL to pull the collection from (default: ``--api-server`` from cmdline)
 - name: infra.leapp
   source: https://github.com/heatmiser/ansible-leapp.git
-  version: upgrade-os-path
+  version: async-timer-vars
   type: git
 - name: https://github.com/heatmiser/ansible-snapshot.git
   type: git

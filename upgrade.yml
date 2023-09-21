@@ -4,7 +4,9 @@
   strategy: free
   become: true
   force_handlers: true
-  # vars:
+  vars:
+    async_timeout_maximum: 3600
+    async_poll_interval: 30
   #   ansible_python_interpreter: /usr/libexec/platform-python
   tasks:
     - name: Perform OS upgrade

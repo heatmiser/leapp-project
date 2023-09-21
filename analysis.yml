@@ -5,6 +5,9 @@
   gather_facts: true
   become: true
   force_handlers: true
+  vars:
+    async_timeout_maximum: 3600
+    async_poll_interval: 30
   pre_tasks:
     - name: Register output of 'yum repolist'
       ansible.builtin.shell: |
