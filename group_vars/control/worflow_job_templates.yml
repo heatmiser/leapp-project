@@ -89,4 +89,56 @@ controller_workflows:
         all_parents_must_converge: false
         type: inventory_source
         success_nodes: []
+  - name: WORKFLOW / 01 Standard Process
+    description: Workflow for Complete Leapp Upgrade
+    extra_vars:
+      lvm_snapshots_action: create
+    inventory: Workshop Inventory
+    state: present
+    organization: Default
+    survey_enabled: true
+    survey_spec:
+      name: ''
+      description: ''
+      spec:
+        - question_name: Select inventory group
+          type: multiplechoice
+          variable: rhel_inventory_group
+          choices:
+            - ALL_rhel
+            - rhel7
+            - rhel8
+            - rhel9
+          required: true
+    ask_limit_on_launch: true
+    simplified_workflow_nodes:
+      - identifier: AUTO / 01 Analysis
+        unified_job_template: AUTO / 01 Analysis
+        organization: Default
+        all_parents_must_converge: false
+        success_nodes:
+          - OS / Remediation
+      - identifier: OS / Remediation
+        unified_job_template: OS / Remediation
+        organization: Default
+        all_parents_must_converge: false
+        success_nodes:
+          - AUTO / 01 Analysis
+      - identifier: AUTO / 01 Analysis
+        unified_job_template: AUTO / 01 Analysis
+        organization: Default
+        all_parents_must_converge: false
+        success_nodes:
+          - AUTO / 02 Upgrade
+      - identifier: AUTO / 02 Upgrade
+        unified_job_template: AUTO / 02 Upgrade
+        organization: Default
+        all_parents_must_converge: false
+        success_nodes:
+          - AUTO / 04 Commit
+      - identifier: AUTO / 04 Commit
+        unified_job_template: AUTO / 04 Commit
+        organization: Default
+        all_parents_must_converge: false
+        success_nodes: []
 ...
