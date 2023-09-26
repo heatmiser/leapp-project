@@ -91,8 +91,6 @@ controller_workflows:
         success_nodes: []
   - name: WORKFLOW / 01 Standard Process
     description: Workflow for Complete Leapp Upgrade
-    extra_vars:
-      lvm_snapshots_action: create
     inventory: Workshop Inventory
     state: present
     organization: Default
@@ -133,15 +131,21 @@ controller_workflows:
         organization: Default
         all_parents_must_converge: false
         success_nodes:
-          - AUTO / 02 Upgrade
-      - identifier: AUTO / 02 Upgrade
-        unified_job_template: AUTO / 02 Upgrade
+          - WORKFLOW SUB-TEMPLATE / 03 Snapshot Create
+      - identifier: WORKFLOW SUB-TEMPLATE / 03 Snapshot Create
+        unified_job_template: WORKFLOW SUB-TEMPLATE / 03 Snapshot Create
         organization: Default
         all_parents_must_converge: false
         success_nodes:
-          - AUTO / 04 Commit
-      - identifier: AUTO / 04 Commit
-        unified_job_template: AUTO / 04 Commit
+          - OS / Upgrade
+      - identifier: OS / Upgrade
+        unified_job_template: OS / Upgrade
+        organization: Default
+        all_parents_must_converge: false
+        success_nodes:
+          - WORKFLOW SUB-TEMPLATE / 04 Snapshot Remove
+      - identifier: WORKFLOW SUB-TEMPLATE / 04 Snapshot Remove
+        unified_job_template: WORKFLOW SUB-TEMPLATE / 04 Snapshot Remove
         organization: Default
         all_parents_must_converge: false
         success_nodes:
