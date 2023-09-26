@@ -267,4 +267,58 @@ controller_templates:
           guid: "{{ lookup('env', 'AWX_HOST').split('.')[1] }}"
           Student: "{{ lookup('env', 'AWX_HOST').split('.')[0] | urlsplit('hostname') }}"
           operating_system: rhel
+  - name: WORKFLOW SUB-TEMPLATE/ 01 Analysis
+    project: Project Leapp
+    playbook: analysis.yml
+    inventory: Workshop Inventory
+    credentials:
+      - Workshop Credential
+    survey_enabled: true
+    survey:
+      name: ''
+      description: ''
+      spec:
+        - question_name: Select inventory group
+          type: multiplechoice
+          variable: rhel_inventory_group
+          choices:
+            - ALL_rhel
+            - rhel7
+            - rhel8
+            - rhel9
+          required: true
+        - question_name: If using limit, repeat here, otherwise leave blank to target all
+          type: text
+          variable: ripu_pet_name
+          required: false
+    extra_vars:
+      leapp_upgrade_type: rhui
+      leapp_repos_enabled: []
+    ask_variables_on_launch: true
+    ask_limit_on_launch: true
+  - name: WORKFLOW SUB-TEMPLATE/ 02 Analysis
+    project: Project Leapp
+    playbook: analysis.yml
+    inventory: Workshop Inventory
+    credentials:
+      - Workshop Credential
+    survey_enabled: true
+    survey:
+      name: ''
+      description: ''
+      spec:
+        - question_name: Select inventory group
+          type: multiplechoice
+          variable: rhel_inventory_group
+          choices:
+            - ALL_rhel
+            - rhel7
+            - rhel8
+            - rhel9
+          required: true
+    extra_vars:
+      leapp_upgrade_type: rhui
+      leapp_repos_enabled: []
+    ask_variables_on_launch: true
+    ask_limit_on_launch: true
 ...
