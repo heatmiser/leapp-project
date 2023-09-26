@@ -112,12 +112,6 @@ controller_workflows:
           required: true
     ask_limit_on_launch: true
     simplified_workflow_nodes:
-      - identifier: AUTO / 01 Analysis
-        unified_job_template: AUTO / 01 Analysis
-        organization: Default
-        all_parents_must_converge: false
-        success_nodes:
-          - OS / Remediation
       - identifier: OS / Remediation
         unified_job_template: OS / Remediation
         organization: Default
@@ -141,4 +135,10 @@ controller_workflows:
         organization: Default
         all_parents_must_converge: false
         success_nodes: []
+      - identifier: AUTO / 01 Analysis
+        unified_job_template: AUTO / 01 Analysis
+        organization: Default
+        all_parents_must_converge: false
+        success_nodes:
+          - OS / Remediation
 ...
