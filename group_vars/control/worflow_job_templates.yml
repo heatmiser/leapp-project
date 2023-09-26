@@ -110,6 +110,10 @@ controller_workflows:
             - rhel8
             - rhel9
           required: true
+        - question_name: If using limit, repeat node name here. Otherwise leave blank to target all.
+          type: text
+          variable: ripu_pet_name
+          required: true
     ask_limit_on_launch: true
     simplified_workflow_nodes:
       - identifier: WORKFLOW SUB-TEMPLATE/ 01 Analysis

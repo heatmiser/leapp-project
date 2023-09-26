@@ -287,10 +287,6 @@ controller_templates:
             - rhel8
             - rhel9
           required: true
-        - question_name: If using limit, repeat here, otherwise leave blank to target all
-          type: text
-          variable: ripu_pet_name
-          required: true
     extra_vars:
       leapp_upgrade_type: rhui
       leapp_repos_enabled: []
