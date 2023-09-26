@@ -139,9 +139,9 @@ controller_workflows:
         organization: Default
         all_parents_must_converge: false
         success_nodes:
-          - UTILITY / Snapshot Instance
-      - identifier: UTILITY / Snapshot Instance
-        unified_job_template: UTILITY / Snapshot Instance
+          - AUTO / 04 Commit
+      - identifier: AUTO / 04 Commit
+        unified_job_template: AUTO / 04 Commit
         organization: Default
         all_parents_must_converge: false
         success_nodes:
