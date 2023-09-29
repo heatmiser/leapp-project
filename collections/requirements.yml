@@ -22,7 +22,10 @@ collections:
 - name: https://github.com/heatmiser/ansible-snapshot.git
   type: git
   version: main
-- name: https://github.com/swapdisk/lvm_snapshots.git
+#- name: https://github.com/swapdisk/lvm_snapshots.git
+#  type: git
+#  version: main
+- name: https://github.com/ygalblum/ipu-lvm-snapshot.git
   type: git
-  version: main
+  version: revert-wait-for-drain
 ...
