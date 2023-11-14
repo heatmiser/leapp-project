@@ -21,4 +21,7 @@ collections:
 - name: https://github.com/swapdisk/lvm_snapshots.git
   type: git
   version: main
+- name: https://github.com/jordigilh/ansible-bash-shrink-lv.git
+  type: git
+  version: first_drop
 ...
