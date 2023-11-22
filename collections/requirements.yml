@@ -21,7 +21,7 @@ collections:
 - name: https://github.com/swapdisk/lvm_snapshots.git
   type: git
   version: main
-- name: https://github.com/ygalblum/ansible-bash-shrink-lv.git
+- name: https://github.com/ygalblum/ansible-bash-shrink-lv#infra.lvm_tools/shrink_lv
   type: git
   version: prelight-checks
 ...
