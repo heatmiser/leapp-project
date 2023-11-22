@@ -13,6 +13,6 @@
         gather_subset:
           - kernel
   roles:
-    - name: infra.lvm_tools.shrink_lv.shrink_lv
+    - name: infra.shrink_lv.shrink_lv
       # shrink_lv_devices vars provided via AAP2 job template and associated surveys
 ...
