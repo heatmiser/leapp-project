@@ -23,5 +23,6 @@ collections:
   version: main
 - name: https://github.com/ygalblum/ansible-bash-bigboot.git
   type: git
-  version: role-initramfs
+#  version: role-initramfs
+  version: nvme-support
 ...
