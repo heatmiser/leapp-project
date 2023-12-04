@@ -269,7 +269,7 @@ controller_templates:
           operating_system: rhel
   - name: UTILITY / Shrink logical volume
     project: Project Leapp
-    playbook: skrink_instance_lvm.yml
+    playbook: shrink_instance_lvm.yml
     inventory: Workshop Inventory
     credentials:
       - Workshop Credential
