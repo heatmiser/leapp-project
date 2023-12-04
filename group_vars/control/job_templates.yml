@@ -267,4 +267,54 @@ controller_templates:
           guid: "{{ lookup('env', 'AWX_HOST').split('.')[1] }}"
           Student: "{{ lookup('env', 'AWX_HOST').split('.')[0] | urlsplit('hostname') }}"
           operating_system: rhel
+  - name: UTILITY / Shrink logical volume
+    project: Project Leapp
+    playbook: skrink_instance_lvm.yml
+    inventory: Workshop Inventory
+    credentials:
+      - Workshop Credential
+    extra_vars:
+      shrink_lv_devices:
+        - device: /dev/mapper/VolGroup00-homeVol
+          size: 1G
+    survey_enabled: true
+    survey:
+      name: ''
+      description: ''
+      spec:
+        - question_name: Select inventory group
+          type: multiplechoice
+          variable: rhel_inventory_group
+          choices:
+            - ALL_rhel
+            - rhel7
+            - rhel8
+            - rhel9
+          required: true
+    ask_variables_on_launch: true
+    ask_limit_on_launch: true
+  - name: UTILITY / Expand boot partition
+    project: Project Leapp
+    playbook: bigboot.yml
+    inventory: Workshop Inventory
+    credentials:
+      - Workshop Credential
+    extra_vars:
+      bigboot_size: 2G
+    survey_enabled: true
+    survey:
+      name: ''
+      description: ''
+      spec:
+        - question_name: Select inventory group
+          type: multiplechoice
+          variable: rhel_inventory_group
+          choices:
+            - ALL_rhel
+            - rhel7
+            - rhel8
+            - rhel9
+          required: true
+    ask_variables_on_launch: true
+    ask_limit_on_launch: true
 ...
