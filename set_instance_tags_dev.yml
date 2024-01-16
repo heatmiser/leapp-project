@@ -33,6 +33,12 @@
           ansible.builtin.set_fact:
             instances: "{{ instances | ansible.builtin.combine(instances_combine2, recursive=true) }}"
 
+    - name: "Display instances variable"
+      ansible.builtin.debug:
+        msg:
+          - "rhel_inventory_group: {{ rhel_inventory_group }}"
+          - "instances: {{ instances }}"
+
     - name: Get instance details
       ansible.builtin.include_role:
         name: heatmiser.ansible_snapshot.aws
