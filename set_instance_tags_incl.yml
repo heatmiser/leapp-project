@@ -3,13 +3,14 @@
   ansible.builtin.set_fact:
     instances_combine:
       tags:
-        short_name: "{{ ansible_loop_host }}"
-  delegate_to: localhost
+        # short_name: "{{ ansible_loop_host }}"
+        short_name: "{{ inventory_hostname_short }}"
+  # delegate_to: localhost
 
 - name: Combine instance extra_var tags with instance tag short_name
   ansible.builtin.set_fact:
     instances: "{{ instances | ansible.builtin.combine(instances_combine, recursive=true) }}"
-  delegate_to: localhost
+  # delegate_to: localhost
 
 - name: Get instance details
   ansible.builtin.include_role:

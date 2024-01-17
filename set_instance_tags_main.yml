@@ -2,7 +2,7 @@
 - name: Set instance tag
   hosts: "{{ rhel_inventory_group | default(omit) }}"
   connection: local
-  gather_facts: false
+  gather_facts: true
   vars:
     instances: "{{ instances_template }}"
     ansible_python_interpreter: /usr/bin/python3
@@ -28,8 +28,8 @@
 
     - name: Primary playbook loop over ansible_play_hosts
       ansible.builtin.include_tasks: set_instance_tags_incl.yml
-      loop: "{{ ansible_play_hosts }}"
-      loop_control:
-        loop_var: ansible_loop_host
-      run_once: true
+      # loop: "{{ ansible_play_hosts }}"
+      # loop_control:
+        # loop_var: ansible_loop_host
+      # run_once: true
 ...
