@@ -1,15 +1,36 @@
 ---
 - name: Set instance tag
-  hosts: "{{ all | default('control[0]') }}"
+  hosts: "{{ rhel_inventory_group | default(omit) }}"
   connection: local
   gather_facts: false
   vars:
     instances: "{{ instances_template }}"
     ansible_python_interpreter: /usr/bin/python3
   tasks:
+    - name: Display value of the --limit argument via ansible_limit
+      ansible.builtin.debug:
+        msg: "ansible_limit: {{ ansible_limit }}"
+      delegate_to: localhost
+      when: ansible_limit is defined
+      run_once: true
+
+    - name: Display value of the --limit argument via ansible_play_hosts
+      ansible.builtin.debug:
+        msg: "ansible_play_hosts: {{ ansible_play_hosts }}"
+      delegate_to: localhost
+      run_once: true
+
+    - name: Display value of the --limit argument via ansible_play_batch
+      ansible.builtin.debug:
+        msg: "ansible_play_batch: {{ ansible_play_batch }}"
+      delegate_to: localhost
+      run_once: true
+
     - name: Primary playbook loop over ansible_play_hosts
       ansible.builtin.include_tasks: set_instance_tags_incl.yml
       loop: "{{ ansible_play_hosts }}"
       loop_control:
         loop_var: ansible_loop_host
+      delegate_to: localhost
+      run_once: true
 ...
