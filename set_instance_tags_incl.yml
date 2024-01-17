@@ -1,0 +1,28 @@
+---
+- name: Set instance tag short_name based on ansible_loop_host
+  ansible.builtin.set_fact:
+    instances_combine:
+      tags:
+        short_name: "{{ ansible_loop_host }}"
+
+- name: Combine instance extra_var tags with instance tag short_name
+  ansible.builtin.set_fact:
+    instances: "{{ instances | ansible.builtin.combine(instances_combine, recursive=true) }}"
+
+- name: Get instance details
+  ansible.builtin.include_role:
+    name: heatmiser.ansible_snapshot.aws
+    tasks_from: instance/get_instance_details
+
+- name: "Display proposed EC2 instance tags"
+  when: instances_details is not none
+  ansible.builtin.debug:
+    msg:
+      - "region: {{ ec2_region }}"
+      - "resource: {{ item.0 }}"
+      - "state: present"
+      - "tags.os_major_version: {{ item.1 | int + 1 }}"
+  with_together:
+    - "{{ instance_details.instances | map(attribute='instance_id') | list }}"
+    - "{{ instance_details.instances | map(attribute='tags.os_major_version') | list }}"
+...
