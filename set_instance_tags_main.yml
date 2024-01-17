@@ -31,6 +31,5 @@
       loop: "{{ ansible_play_hosts }}"
       loop_control:
         loop_var: ansible_loop_host
-      delegate_to: localhost
       run_once: true
 ...
