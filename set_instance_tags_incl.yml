@@ -15,7 +15,8 @@
   ansible.builtin.include_role:
     name: heatmiser.ansible_snapshot.aws
     tasks_from: instance/get_instance_details
-  delegate_to: localhost
+    apply:
+      delegate_to: localhost
 
 - name: "Display proposed EC2 instance tags"
   when: instances_details is not none
