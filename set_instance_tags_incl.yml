@@ -20,7 +20,9 @@
       delegate_to: localhost
 
 - name: "Display proposed EC2 instance tags"
-  when: instances_details is not none
+  when:
+    - instances_details is not none
+    - instance_details.instances | map(attribute='tags.os_major_version') | first | int + 1 == ansible_distribution_major_version | int
   ansible.builtin.debug:
     msg:
       - "region: {{ ec2_region }}"
