@@ -1,0 +1,23 @@
+---
+- name: Upgrade
+  hosts: "{{ rhel_inventory_group | default(omit) }}"
+  strategy: free
+  become: true
+  # vars:
+  #   ansible_python_interpreter: /usr/libexec/platform-python
+  tasks:
+    - name: Display value of the --limit argument via ansible_limit
+      ansible.builtin.debug:
+        msg: "ansible_limit: {{ ansible_limit }}"
+      delegate_to: localhost
+
+    - name: Display value of the --limit argument via ansible_play_hosts
+      ansible.builtin.debug:
+        msg: "ansible_play_hosts: {{ ansible_play_hosts }}"
+      delegate_to: localhost
+
+    - name: Display value of the --limit argument via ansible_play_batch
+      ansible.builtin.debug:
+        msg: "ansible_play_batch: {{ ansible_play_batch }}"
+      delegate_to: localhost
+...
