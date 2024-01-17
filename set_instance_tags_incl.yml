@@ -23,10 +23,11 @@
   ansible.builtin.debug:
     msg:
       - "region: {{ ec2_region }}"
-      - "resource: {{ item.0 }}"
+      - "resource: {{ item.1 }}"
       - "state: present"
-      - "tags.os_major_version: {{ item.1 | int + 1 }}"
+      - "tags.os_major_version: {{ item.2 | int + 1 }}"
   with_together:
+    - "{{ instance_details.instances | map(attribute='short_name') | list }}"
     - "{{ instance_details.instances | map(attribute='instance_id') | list }}"
     - "{{ instance_details.instances | map(attribute='tags.os_major_version') | list }}"
   delegate_to: localhost
