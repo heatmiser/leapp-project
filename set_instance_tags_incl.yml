@@ -19,6 +19,13 @@
     apply:
       delegate_to: localhost
 
+- name: "Display various vars"
+  when: instances_details is not none
+  ansible.builtin.debug:
+    msg:
+      - "{{ instance_details.instances | map(attribute='tags.short_name') | list }}"
+      - "{{ ansible_distribution_major_version | int }}"
+
 - name: "Display proposed EC2 instance tags"
   when:
     - instances_details is not none
