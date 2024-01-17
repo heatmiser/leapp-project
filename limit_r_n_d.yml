@@ -10,6 +10,7 @@
       ansible.builtin.debug:
         msg: "ansible_limit: {{ ansible_limit }}"
       delegate_to: localhost
+      when: ansible_limit is defined
 
     - name: Display value of the --limit argument via ansible_play_hosts
       ansible.builtin.debug:
