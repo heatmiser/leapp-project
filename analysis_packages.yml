@@ -1,0 +1,11 @@
+---
+analysis_packages_el7:
+  - cockpit
+  - cockpit-system
+  - cockpit-leapp
+analysis_packages_el8:
+  - cockpit
+  - cockpit-system
+  - cockpit-leapp
+  - vdo
+...

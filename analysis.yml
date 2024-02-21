@@ -5,6 +5,11 @@
   gather_facts: true
   become: true
   force_handlers: true
+  pre_tasks:
+    - name: Include additional analysis packages from vars file
+      ansible.builtin.include_vars:
+        file: analysis_packages.yml
+        hash_behaviour: merge
   roles:
     - infra.leapp.analysis
   tasks:
